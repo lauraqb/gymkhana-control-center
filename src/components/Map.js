@@ -17,12 +17,11 @@ export class MapContainer extends Component {
     this.state = {
       teams: [
         {team: "rojo", latitude: 41.3846877, longitude: 2.1800151999999997},
-        //{latitude: 41.3846877, longitude: 2.1810151999999997},
       ]
     }
 
     /*requestFromControlCenter: Al cargar la página, le pedimos al servidor que nos mande las coordenadas*/
-    socket.emit("requestFromControlCenter")
+    socket.emit("requestCoordenadasFromCC")
     
     socket.on("coordenadasFromServer", data => {
         let noEncontrado = true
@@ -62,6 +61,7 @@ export class MapContainer extends Component {
       />
     })
   }
+
   render() {
     return (
       <Map

@@ -1,14 +1,20 @@
 import React from 'react';
-import { Offline, Online } from "react-detect-offline";
 import MapContainer from './components/Map'
+import TeamsContainer from './components/Teams'
 import './App.css';
+
+
+import socketIOClient from "socket.io-client";
+
+const endpoint = 'http://localhost:8000' 
+const socket = socketIOClient(endpoint);
+
 
 function App() {
   
   return (
     <div className="App">
-      <Online>Only shown when you're online</Online>
-      <Offline>Only shown offline (surprise!)</Offline>
+      <TeamsContainer socket={socket}/>
       <MapContainer/>
       <header className="App-header"></header>
       
