@@ -41,7 +41,7 @@ export class MapContainer extends Component {
     let noEncontrado = true
     let equipos = this.state.jugadores
     equipos.map((item, key)=>{
-      if(item.equipo == data.equipo) {
+      if(item.equipo === data.equipo) {
         equipos[key].latitude = data.latitude
         equipos[key].longitude = data.longitude
         noEncontrado = false

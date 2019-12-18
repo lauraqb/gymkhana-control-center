@@ -25,10 +25,9 @@ export class TeamsContainer extends React.Component {
     }
 
     eliminarJugador = (nombreJugador) => {
-        debugger
-        this.props.socket.emit("eliminarJugadorFromCC", nombreJugador, ()=>{
-            debugger
-            //quitar del state al jugador
+        this.props.socket.emit("eliminarJugadorFromCC", nombreJugador, (data) => {
+            if (data) this.props.socket.emit("requestUserListFromCC")
+            else console.log("Error: jugador no eliminado")
         })
     }
 
