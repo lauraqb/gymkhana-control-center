@@ -35,14 +35,14 @@ export class TeamsContainer extends React.Component {
         if(this.state.jugadores) {
             return this.state.jugadores.map((jugador, index) => {
                 if (jugador.equipo === nombreEquipo)
-                    return <ListGroup.Item>{jugador.nombre}<IosTrash fontSize="20px" color="grey" onClick={() => this.eliminarJugador(jugador.nombre)}  className="trash-icon"/></ListGroup.Item>
+                    return <ListGroup.Item key={jugador.nombre}>{jugador.nombre}<IosTrash fontSize="20px" color="grey" onClick={() => this.eliminarJugador(jugador.nombre)}  className="trash-icon"/></ListGroup.Item>
             })
         }
         
     }
     render() {
         return <div>
-            <Container>
+            <Container className="equipos-container">
                 <Row>
                     <Col>
                         <ListGroup> 

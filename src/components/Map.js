@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import socketIOClient from "socket.io-client";
-
-const endpoint = 'http://localhost:8000' 
-const socket = socketIOClient(endpoint);
 
 const mapStyles = {
   width: '90%',
@@ -23,7 +19,7 @@ export class MapContainer extends Component {
     this.state = {
       jugadores: []
     }
-
+    const socket = this.props.socket
     /*requestFromControlCenter: Al cargar la página, le pedimos al servidor que nos mande las coordenadas*/
     socket.emit("requestCoordenadasFromCC", (data) => {
       const parseData = JSON.parse(data)
@@ -90,9 +86,10 @@ export class MapContainer extends Component {
     );
   }
 }
-//process.env.GOOGLE_MAPS_API_KEY
+//
+
 export default GoogleApiWrapper({
-  apiKey:  ""
+  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 })(MapContainer);
    
 
