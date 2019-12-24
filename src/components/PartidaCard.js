@@ -7,16 +7,15 @@ import Button from 'react-bootstrap/Button'
 export class PartidaCard extends React.Component {
     constructor(props) {
       super(props)
+      this.nombrePartida = this.props.nombre
     }
 
     render() {
         return <Card>
-        <Card.Img variant="top" src="holder.js/100px180" />
         <Card.Body>
-          <Card.Title>Nombre Partida</Card.Title>
+          <Card.Title>{this.nombrePartida}</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
+            Texto, clave, equipos
           </Card.Text>
           <Link to="./partida" className="App-link">
               <Button type="submit">Abrir Partida</Button>

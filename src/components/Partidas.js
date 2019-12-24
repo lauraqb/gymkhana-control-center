@@ -18,22 +18,27 @@ export class PartidasContainer extends React.Component {
 
         this.handleClick = this.handleClick.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        
+        this.getPartidas()
     }
     handleClick = () => {
         this.setState({ modal: true});
     }
 
-    handleSubmit = (e) => {
-        debugger
+    handleSubmit = (event) => {
+        event.preventDefault();
         const data = {
-            nombrePartida: e.nombre, 
-            clave: e.clave
-
+            nombrePartida: document.getElementById("nombrePartida").value,
+            clave: document.getElementById("clavePartida").value
         }
-        this.props.socket.emit("addNuevaPartida", {nombre: e.nombre, clave: e.clave}, (data)=> {
-            if(data) this.setState({ modal: false})
-        })
+        if(data.nombrePartida && data.clave) {
+            this.props.socket.emit("addNuevaPartida", data, (data)=> {
+                if(data) this.setState({ modal: false})
+            })
+        }
+        else {
+            console.log("faltan datos")
+        }
+        
     }
 
     getPartidas = () => {
@@ -48,7 +53,7 @@ export class PartidasContainer extends React.Component {
     displayPartidaCards = () => {
         if(this.state.partidas) {
             return this.state.partidas.map((partida, index) => {
-                return <PartidaCard key={partida.nombre}>{partida.nombre}></PartidaCard>
+                return <PartidaCard nombre={partida.nombre_partida}></PartidaCard>
             })
         }
     }
@@ -61,41 +66,40 @@ export class PartidasContainer extends React.Component {
                     <Modal.Title>Crear nueva partida</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <Form className="nueva-partida-form">
-                <Form.Row>
-                    <Form.Group as={Col} controlId="formGridEmail">
-                        <Form.Label>Nombre de la partida</Form.Label>
-                        <Form.Control placeholder="Introduce el nombre" />
-                    </Form.Group>
+                <Form className="nueva-partida-form" onSubmit={this.handleSubmit}>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="nombrePartida">
+                            <Form.Label>Nombre de la partida</Form.Label>
+                            <Form.Control placeholder="Introduce el nombre" />
+                        </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridPassword">
-                        <Form.Label>Clave</Form.Label>
-                        <Form.Control placeholder="Introduce la clave" />
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                    <Form.Label>Equipos</Form.Label>
-                    <Form.Row className="form-equipo">
-                        <Col>
-                        <Form.Control placeholder="Nombre equipo" />
-                        </Col>
-                        <Col>
-                        <Form.Control placeholder="Clave" />
-                        </Col>
+                        <Form.Group as={Col} controlId="clavePartida">
+                            <Form.Label>Clave</Form.Label>
+                            <Form.Control placeholder="Introduce la clave" />
+                        </Form.Group>
                     </Form.Row>
-                    + Añadir nuevo equipo
-                    </Form.Row>
-                
-                <Button variant="primary" type="submit" onSubmit={this.handleSubmit}>
-                    Submit
-                </Button>
+                    <Form.Row>
+                        <Form.Label>Equipos</Form.Label>
+                        <Form.Row className="form-equipo">
+                            <Col>
+                            <Form.Control placeholder="Nombre equipo" />
+                            </Col>
+                            <Col>
+                            <Form.Control placeholder="Clave" />
+                            </Col>
+                        </Form.Row>
+                        + Añadir nuevo equipo
+                        </Form.Row>
+                    
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
                 </Form>
                 </Modal.Body>
             </Modal>
             
 
             {this.displayPartidaCards()} 
-            <PartidaCard/>
         </Container>
     }
 }
