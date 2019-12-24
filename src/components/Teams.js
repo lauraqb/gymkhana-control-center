@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ListGroup from 'react-bootstrap/ListGroup'
 import IosTrash from 'react-ionicons/lib/MdTrash'
-import '../styles/teams.css';
+import '../styles/Teams.css';
 
 
 export class TeamsContainer extends React.Component {
@@ -15,7 +15,7 @@ export class TeamsContainer extends React.Component {
             jugadores: null,
         }
         const This = this
-        let socket = this.props.socket
+        const socket = this.props.socket
         socket.emit("requestUserListFromCC")
         socket.on("usersList", function(data) {
             This.setState({
@@ -42,21 +42,20 @@ export class TeamsContainer extends React.Component {
     }
     render() {
         return <div>
-            <Container className="equipos-container">
-                <Row>
-                    <Col>
-                        <ListGroup> 
-                            <ListGroup.Item variant="danger">Equipo Rojo</ListGroup.Item>
-                            {this.displayTeamList("rojo")} 
-                        </ListGroup>
-                    </Col>
-                    <Col><ListGroup> 
-                        <ListGroup.Item variant="primary">Equipo Azul</ListGroup.Item>
-                        {this.displayTeamList("azul")} 
-                    </ListGroup></Col>
-                </Row>
+        <Container fluid="true">
+            <Row className="equipos-container">
+                <Col>
+                    <ListGroup> 
+                        <ListGroup.Item variant="danger">Equipo Rojo</ListGroup.Item>
+                        {this.displayTeamList("rojo")} 
+                    </ListGroup>
+                </Col>
+                <Col><ListGroup> 
+                    <ListGroup.Item variant="primary">Equipo Azul</ListGroup.Item>
+                    {this.displayTeamList("azul")} 
+                </ListGroup></Col>
+            </Row>
             </Container>
-            
         </div>
     }
 }
