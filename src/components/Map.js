@@ -4,8 +4,6 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 const mapStyles = {
   width: '100%',
   height: '100%',
-  // width: 'calc(100vw - 68px)',
-  // height: '50vh'
 };
 
 const colores = {

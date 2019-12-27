@@ -7,3 +7,12 @@
     border-radius: 5px;
     padding: 10px 0;
 }
+
+.Card-link {
+    color: rgb(36, 36, 36);
+}
+
+.icono {
+    float: left;
+    margin-right: 10px;
+}

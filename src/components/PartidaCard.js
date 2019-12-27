@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-
+import { IconContext } from "react-icons";
+import { GiAbstract118 } from "react-icons/gi";
 
 export class PartidaCard extends React.Component {
     constructor(props) {
@@ -11,18 +12,19 @@ export class PartidaCard extends React.Component {
     }
 
     render() {
-        return <Card>
-        <Card.Body>
-          <Card.Title>{this.nombrePartida}</Card.Title>
-          <Card.Text>
-            Texto, clave, equipos
-          </Card.Text>
-          <Link to="./partida" className="App-link">
-              <Button type="submit">Abrir Partida</Button>
-          </Link>
-
-        </Card.Body>
-      </Card>
+        return  <Link to="./partida" className="Card-link">
+        <Card>
+          <Card.Body>
+          <IconContext.Provider value={{ color: "red", size:	"2em" }}>
+              <div className="icono"><GiAbstract118 /></div>
+            </IconContext.Provider>
+            <Card.Text>
+              <h5>{this.nombrePartida}</h5>
+              Texto, clave, equipos
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Link>
     }
 }
 
