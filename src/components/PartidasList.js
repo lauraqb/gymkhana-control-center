@@ -4,10 +4,9 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import NuevaPartidaModal from './NuevaPartidaModal'
 import PartidaCard from './PartidaCard'
+import Card from 'react-bootstrap/Card'
 
-import '../styles/Partidas.css'
-
-export class PartidasContainer extends React.Component {
+export class PartidasListContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -25,8 +24,6 @@ export class PartidasContainer extends React.Component {
             alert("socket disconnected")
         
     }
-
-    
 
     getPartidas = () => {
         var This = this
@@ -48,13 +45,11 @@ export class PartidasContainer extends React.Component {
     render() {
         return <div>
             <center>Selecciona una partida</center>
-            <Row>
-                <Col><Button onClick={this.handleClick}>Crear una partida</Button></Col>
-            </Row>
-            <NuevaPartidaModal modal={this.state.modal} socket={this.props.socket}></NuevaPartidaModal>
             {this.displayPartidaCards()} 
+            <Card className="g-card" onClick={this.handleClick}><Card.Body><h5>+ Crear una partida</h5></Card.Body></Card>
+            <NuevaPartidaModal modal={this.state.modal} socket={this.props.socket}></NuevaPartidaModal>
         </div>
     }
 }
 
-export default PartidasContainer
+export default PartidasListContainer

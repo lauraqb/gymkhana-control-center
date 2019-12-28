@@ -1,5 +1,5 @@
 import React from 'react';
-import PartidasContainer from '../components/Partidas'
+import PartidasListContainer from '../components/PartidasList'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -27,12 +27,14 @@ class Home extends React.Component {
         if (envMissing) {
             return <p>Falta el fichero .env</p>;
         }
-        return <Container className="container-home">
-            <Row>
-                <Col><h3><center>Centro de Control</center></h3></Col>
-            </Row>
-            <PartidasContainer socket={socket}/>
-        </Container>
+        return <div className="App-content">
+                <Container>
+                <Row>
+                    <Col><div className="g-titulo"><h3>Centro de Control</h3></div></Col>
+                </Row>
+                <PartidasListContainer socket={socket}/>
+            </Container>
+        </div>
         
     }
 }
