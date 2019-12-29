@@ -1,7 +1,6 @@
-.g-titulo{
+.g-title{
     text-align: center;
     margin-top: 10px;
-
 }
 
 /**PartidasList component*/
@@ -15,8 +14,9 @@
     padding: 10px 0;
 }
 
-.g-link {
+a.g-link {
     color: rgb(36, 36, 36);
+    text-decoration: none;
 }
 
 .icono {
@@ -31,4 +31,12 @@
 .g-card .card-body {
     padding: 1.0rem;
     cursor: pointer;
+}
+
+.g-card-title {
+    font-weight: bold;
+}
+
+.g-card:hover {
+    background-color: aliceblue;
 }

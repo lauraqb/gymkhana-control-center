@@ -1,5 +1,5 @@
 import React from 'react';
-import PartidasListContainer from '../components/PartidasList'
+import GamesListContainer from '../components/GamesList'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -30,9 +30,9 @@ class Home extends React.Component {
         return <div className="App-content">
                 <Container>
                 <Row>
-                    <Col><div className="g-titulo"><h3>Centro de Control</h3></div></Col>
+                    <Col><div className="g-title"><h3>Centro de Control</h3></div></Col>
                 </Row>
-                <PartidasListContainer socket={socket}/>
+                <GamesListContainer socket={socket}/>
             </Container>
         </div>
         

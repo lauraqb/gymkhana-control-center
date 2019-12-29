@@ -4,22 +4,24 @@ import Card from 'react-bootstrap/Card'
 import { IconContext } from "react-icons";
 import { GiAbstract118 } from "react-icons/gi";
 
-export class PartidaCard extends React.Component {
+export class GameCard extends React.Component {
     constructor(props) {
       super(props)
       this.nombrePartida = this.props.nombre
+      this.clave = this.props.clave
+      this.link = "./partida?id="+this.props.id+"?clave="+this.props.clave
     }
 
     render() {
-        return  <Link to="./partida" className="g-link">
+        return  <Link to={this.link} className="g-link">
         <Card className="g-card">
           <Card.Body>
             <IconContext.Provider value={{ color: "#5a80a9", size:	"2.50em" }}>
                 <div className="icono"><GiAbstract118 /></div>
             </IconContext.Provider>
             <div>
-              <Card.Text className="nombre-partida">{this.nombrePartida}</Card.Text>
-              <Card.Text>Texto, clave, equipos </Card.Text>
+              <Card.Text className="g-card-title">{this.nombrePartida}</Card.Text>
+              <Card.Text>Clave: {this.clave}</Card.Text>
             </div>
           </Card.Body>
         </Card>
@@ -27,4 +29,4 @@ export class PartidaCard extends React.Component {
     }
 }
 
-export default PartidaCard
+export default GameCard

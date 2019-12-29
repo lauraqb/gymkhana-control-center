@@ -1,43 +1,38 @@
 import React from 'react';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import NuevaPartidaModal from './NuevaPartidaModal'
-import PartidaCard from './PartidaCard'
+import NewGameModal from './NewGameModal'
+import GameCard from './GameCard'
 import Card from 'react-bootstrap/Card'
 
-export class PartidasListContainer extends React.Component {
+export class GamesListContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             modal: false,
-            partidas: null
+            games: null
         }
-
         this.handleClick = this.handleClick.bind(this)
-        this.getPartidas()
+        this.getGames()
     }
     handleClick = () => {
         if (this.props.socket.connected)
             this.setState({ modal: true});
         else 
             alert("socket disconnected")
-        
     }
 
-    getPartidas = () => {
+    getGames = () => {
         var This = this
         this.props.socket.emit("requestPartidasFromCC", (data) => {
             This.setState({
-                partidas: data
+                games: data
             })
         })
     }
 
     displayPartidaCards = () => {
-        if(this.state.partidas) {
-            return this.state.partidas.map((partida, index) => {
-                return <PartidaCard nombre={partida.nombre_partida}></PartidaCard>
+        if(this.state.games) {
+            return this.state.games.map((game, index) => {
+                return <GameCard nombre={game.nombre_partida} id={game.id} clave={game.clave}></GameCard>
             })
         }
     }
@@ -47,9 +42,9 @@ export class PartidasListContainer extends React.Component {
             <center>Selecciona una partida</center>
             {this.displayPartidaCards()} 
             <Card className="g-card" onClick={this.handleClick}><Card.Body><h5>+ Crear una partida</h5></Card.Body></Card>
-            <NuevaPartidaModal modal={this.state.modal} socket={this.props.socket}></NuevaPartidaModal>
+            <NewGameModal modal={this.state.modal} socket={this.props.socket}></NewGameModal>
         </div>
     }
 }
 
-export default PartidasListContainer
+export default GamesListContainer

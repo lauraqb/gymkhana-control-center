@@ -1,11 +1,10 @@
 import React from 'react'
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-export class NuevaPartidaModal extends React.Component {
+export class NewGameModal extends React.Component {
     constructor(props) {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -67,4 +66,4 @@ export class NuevaPartidaModal extends React.Component {
     }
 }
 
-export default NuevaPartidaModal
+export default NewGameModal

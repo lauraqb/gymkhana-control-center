@@ -17,25 +17,25 @@ export class MapContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      jugadores: []
+      players: []
     }
     const socket = this.props.socket
     /*requestFromControlCenter: Al cargar la página, le pedimos al servidor que nos mande las coordenadas*/
     socket.emit("requestCoordenadasFromCC", (data) => {
       const parseData = JSON.parse(data)
       this.setState({
-        jugadores: parseData
+        players: parseData
       })
     })
     
     socket.on("coordenadasFromServer", data => {
-      this.actualizarCoordenadasState(data)
+      this.updateCoordinatesState(data)
     })
   }
 
-  actualizarCoordenadasState = (data) => {
+  updateCoordinatesState = (data) => {
     let noEncontrado = true
-    let equipos = this.state.jugadores
+    let equipos = this.state.players
     equipos.map((item, key)=>{
       if(item.equipo === data.equipo) {
         equipos[key].latitude = data.latitude
@@ -50,13 +50,13 @@ export class MapContainer extends Component {
       equipos.push(data)
     }
     this.setState({
-      jugadores: equipos
+      players: equipos
     })
   }
 
 
   displayMarkers = () => {
-    return this.state.jugadores.map((jugador, index) => {
+    return this.state.players.map((jugador, index) => {
       let iconUrl = colores[jugador.equipo] ? colores[jugador.equipo] : "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
       return <Marker key={index} id={index} position={
         {

@@ -10,21 +10,21 @@ import '../styles/Teams.css';
 export class TeamsContainer extends React.Component {
     constructor(props) {
         super(props)
-        this.eliminarJugador = this.eliminarJugador.bind(this)
+        this.deletePlayer = this.deletePlayer.bind(this)
         this.state = {
-            jugadores: null,
+            players: null,
         }
         const This = this
         const socket = this.props.socket
-        socket.emit("requestUserListFromCC")
+        socket.emit("requestUserListFromCC", {id_game: "obtener id de los parametros de la url"})
         socket.on("usersList", function(data) {
             This.setState({
-                jugadores: data
+                players: data
             })
         })
     }
 
-    eliminarJugador = (nombreJugador) => {
+    deletePlayer = (nombreJugador) => {
         this.props.socket.emit("eliminarJugadorFromCC", nombreJugador, (data) => {
             if (data) this.props.socket.emit("requestUserListFromCC")
             else console.log("Error: jugador no eliminado")
@@ -32,8 +32,8 @@ export class TeamsContainer extends React.Component {
     }
 
     displayTeamList = (nombreEquipo) => {
-        if(this.state.jugadores) {
-            return this.state.jugadores.map((jugador, index) => {
+        if(this.state.players) {
+            return this.state.players.map((jugador, index) => {
                 if (jugador.equipo === nombreEquipo)
                     return <ListGroup.Item key={jugador.nombre}>{jugador.nombre}<IosTrash fontSize="20px" color="grey" onClick={() => this.eliminarJugador(jugador.nombre)}  className="trash-icon"/></ListGroup.Item>
             })
