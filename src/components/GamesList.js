@@ -1,14 +1,18 @@
-import React from 'react';
+import React from 'react'
+import axios from 'axios'
 import NewGameModal from './NewGameModal'
 import GameCard from './GameCard'
 import Card from 'react-bootstrap/Card'
 
-export class GamesListContainer extends React.Component {
+const endpoint = process.env.REACT_APP_SERVER_ENDPOINT
+
+export class GamesList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             modal: false,
-            games: null
+            games: null,
+            error: null
         }
         this.handleClick = this.handleClick.bind(this)
         this.getGames()
@@ -21,30 +25,36 @@ export class GamesListContainer extends React.Component {
     }
 
     getGames = () => {
-        var This = this
-        this.props.socket.emit("requestPartidasFromCC", (data) => {
-            This.setState({
-                games: data
+        axios.get(endpoint+"/games")
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                games: res.data
             })
         })
+        .catch(error => this.setState({ error: error.message }));
     }
 
     displayPartidaCards = () => {
         if(this.state.games) {
             return this.state.games.map((game, index) => {
-                return <GameCard nombre={game.nombre_partida} id={game.id} clave={game.clave}></GameCard>
+                return <GameCard nombre={game.name} id={game.id} pin={game.pin}></GameCard>
             })
         }
     }
 
     render() {
+        if (this.state.error) {
+            return <div>this.state.error</div>
+        }
         return <div>
             <center>Selecciona una partida</center>
             {this.displayPartidaCards()} 
-            <Card className="g-card" onClick={this.handleClick}><Card.Body><h5>+ Crear una partida</h5></Card.Body></Card>
+            {/* TODO: donde poner el crear partida? */}
+            {/* <Card className="g-card" onClick={this.handleClick}><Card.Body><h5>+ Crear una partida</h5></Card.Body></Card> */}
             <NewGameModal modal={this.state.modal} socket={this.props.socket}></NewGameModal>
         </div>
     }
 }
 
-export default GamesListContainer
+export default GamesList

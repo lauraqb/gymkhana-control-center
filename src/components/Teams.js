@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -6,58 +7,77 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import IosTrash from 'react-ionicons/lib/MdTrash'
 import '../styles/Teams.css';
 
+const endpoint = process.env.REACT_APP_SERVER_ENDPOINT
 
-export class TeamsContainer extends React.Component {
+export class Teams extends React.Component {
     constructor(props) {
         super(props)
         this.deletePlayer = this.deletePlayer.bind(this)
         this.state = {
             players: null,
         }
-        const This = this
-        const socket = this.props.socket
-        socket.emit("requestUserListFromCC", {id_game: "obtener id de los parametros de la url"})
-        socket.on("usersList", function(data) {
-            This.setState({
-                players: data
-            })
-        })
+        this.gameId = this.props.gameId
+        this.getTeamsList()
+        this.getPlayersList()
     }
 
-    deletePlayer = (nombreJugador) => {
-        this.props.socket.emit("eliminarJugadorFromCC", nombreJugador, (data) => {
-            if (data) this.props.socket.emit("requestUserListFromCC")
-            else console.log("Error: jugador no eliminado")
+    getTeamsList = () => {
+        axios.get(endpoint+"/games/"+this.gameId+"/teams")
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                teams: res.data
+            })
         })
+        .catch(error => this.setState({ error: error.message }));
+    }
+
+    getPlayersList = () => {
+        axios.get(endpoint+"/games/"+this.gameId+"/players")
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                players: res.data
+            })
+        })
+        .catch(error => this.setState({ error: error.message }));
+    }
+
+    deletePlayer = (playerId) => {
+        axios.get(endpoint+"/deletePlayer/"+playerId)
+        .then(res => {
+            this.getPlayersList()
+        })
+        .catch(error => this.setState({ error: error.message }));
     }
 
     displayTeamList = (nombreEquipo) => {
-        if(this.state.players) {
-            return this.state.players.map((jugador, index) => {
-                if (jugador.equipo === nombreEquipo)
-                    return <ListGroup.Item key={jugador.nombre}>{jugador.nombre}<IosTrash fontSize="20px" color="grey" onClick={() => this.eliminarJugador(jugador.nombre)}  className="trash-icon"/></ListGroup.Item>
-            })
-        }
-        
+        if(!this.state.players) return <div>No players</div>
+        return this.state.players.map((player) => {
+            if (player.team_id === nombreEquipo)
+                return <ListGroup.Item key={player.name}>{player.name}<IosTrash fontSize="20px" color="grey" onClick={() => this.deletePlayer(player.id)}  className="trash-icon"/></ListGroup.Item>
+        })
+    }
+    displayTeamsData = () => {
+        if(!this.state.players) return <div>No players</div>
+        return this.state.teams.map((team) => {
+            return <Col>
+                    <ListGroup> 
+                        <ListGroup.Item variant="danger">{team.name}</ListGroup.Item>
+                        {this.displayTeamList(team.id)} 
+                    </ListGroup>
+                </Col>
+        })
     }
     render() {
         return <div>
         <Container fluid="true">
             <Row className="equipos-container">
-                <Col>
-                    <ListGroup> 
-                        <ListGroup.Item variant="danger">Equipo Rojo</ListGroup.Item>
-                        {this.displayTeamList("rojo")} 
-                    </ListGroup>
-                </Col>
-                <Col><ListGroup> 
-                    <ListGroup.Item variant="primary">Equipo Azul</ListGroup.Item>
-                    {this.displayTeamList("azul")} 
-                </ListGroup></Col>
+                {this.displayTeamsData()} 
             </Row>
             </Container>
         </div>
     }
 }
 
-export default TeamsContainer
+export default Teams

@@ -9,7 +9,7 @@ export class GameCard extends React.Component {
       super(props)
       this.nombrePartida = this.props.nombre
       this.clave = this.props.clave
-      this.link = "./partida?id="+this.props.id+"?clave="+this.props.clave
+      this.link = "./game/"+this.props.id+"?clave="+this.props.pin
     }
 
     render() {

@@ -1,18 +1,19 @@
 import React from 'react';
 import MapContainer from '../components/Map'
-import TeamsContainer from '../components/Teams'
+import Teams from '../components/Teams'
 import socketIOClient from "socket.io-client";
 
 const endpoint = process.env.REACT_APP_SERVER_ENDPOINT
 const socket = socketIOClient(endpoint);
 
 class Partida extends React.Component {
-    // constructor(props) {
-
-    // }
+    constructor(props) {
+        super(props)
+        this.id = this.props.match.params.id
+    }
     render() {
         return <div className="App">
-            <TeamsContainer socket={socket}/>
+            <Teams socket={socket} gameId={this.id}/>
             <MapContainer socket={socket}/>
         </div>
     }
