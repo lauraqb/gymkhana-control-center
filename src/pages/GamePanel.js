@@ -6,8 +6,9 @@ import socketIOClient from "socket.io-client";
 const endpoint = process.env.REACT_APP_SERVER_ENDPOINT
 const socket = socketIOClient(endpoint);
 
-class Partida extends React.Component {
+class GamePanel extends React.Component {
     constructor(props) {
+        debugger
         super(props)
         this.id = this.props.match.params.id
     }
@@ -19,4 +20,4 @@ class Partida extends React.Component {
     }
 }
 
-export default Partida
+export default GamePanel

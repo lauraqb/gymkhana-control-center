@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ListGroup from 'react-bootstrap/ListGroup'
 import IosTrash from 'react-ionicons/lib/MdTrash'
-import '../styles/Teams.css';
+import './styles/Teams.css';
 
 const endpoint = process.env.REACT_APP_SERVER_ENDPOINT
 
@@ -56,27 +56,28 @@ export class Teams extends React.Component {
         return this.state.players.map((player) => {
             if (player.team_id === nombreEquipo)
                 return <ListGroup.Item key={player.name}>{player.name}<IosTrash fontSize="20px" color="grey" onClick={() => this.deletePlayer(player.id)}  className="trash-icon"/></ListGroup.Item>
+            else return null
         })
     }
     displayTeamsData = () => {
-        if(!this.state.players) return <div>No players</div>
+        if(!this.state.teams) return <div>No teams</div>
         return this.state.teams.map((team) => {
             return <Col>
                     <ListGroup> 
-                        <ListGroup.Item variant="danger">{team.name}</ListGroup.Item>
+                        <ListGroup.Item variant="primary">Equipo {team.name}</ListGroup.Item>
                         {this.displayTeamList(team.id)} 
                     </ListGroup>
                 </Col>
         })
     }
     render() {
-        return <div>
-        <Container fluid="true">
-            <Row className="equipos-container">
-                {this.displayTeamsData()} 
-            </Row>
+        return (
+            <Container fluid="true" className="teams-container">
+                <Row>
+                    {this.displayTeamsData()} 
+                </Row>
             </Container>
-        </div>
+        )
     }
 }
 

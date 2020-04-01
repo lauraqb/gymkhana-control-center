@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import NewGameModal from './NewGameModal'
 import GameCard from './GameCard'
-import Card from 'react-bootstrap/Card'
 
 const endpoint = process.env.REACT_APP_SERVER_ENDPOINT
 
@@ -36,16 +35,17 @@ export class GamesList extends React.Component {
     }
 
     displayPartidaCards = () => {
-        if(this.state.games) {
-            return this.state.games.map((game, index) => {
-                return <GameCard nombre={game.name} id={game.id} pin={game.pin}></GameCard>
-            })
-        }
+        return this.state.games.map((game, index) => {
+            return <GameCard nombre={game.name} id={game.id} pin={game.pin}></GameCard>
+        })
     }
 
     render() {
         if (this.state.error) {
-            return <div>this.state.error</div>
+            return <div><center>{this.state.error}</center></div>
+        }
+        else if (!this.state.games) {
+            return <div><center>Loading...</center></div>
         }
         return <div>
             <center>Selecciona una partida</center>

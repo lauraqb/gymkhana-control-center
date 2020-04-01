@@ -23,7 +23,7 @@ class Home extends React.Component {
     }
     
     render() {
-        const { envMissing, error } = this.state;
+        const { envMissing } = this.state;
         if (envMissing) {
             return <p>Falta el fichero .env</p>;
         }

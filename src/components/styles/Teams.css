@@ -1,0 +1,13 @@
+.teams-container {
+    margin: 20px 0;
+}
+
+.teams-container .list-group-item{
+    padding: 3px;
+    font-size: 13px;
+}
+
+.trash-icon {
+    float: right;
+    cursor: pointer;
+}

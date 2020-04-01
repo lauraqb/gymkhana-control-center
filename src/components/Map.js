@@ -37,15 +37,15 @@ export class MapContainer extends Component {
     let noEncontrado = true
     let equipos = this.state.players
     equipos.map((item, key)=>{
-      if(item.equipo === data.equipo) {
+      if(item.playerId === data.playerId) {
         equipos[key].latitude = data.latitude
         equipos[key].longitude = data.longitude
         noEncontrado = false
-        console.log('El equipo '+data.equipo+' se está moviendo')
+        console.log('El equipo '+data.playerId+' se está moviendo')
         console.log(data)
       }
     })
-    if (noEncontrado) {
+    if (noEncontrado) { //TODO ??
       console.log('El equipo '+data.equipo+' ha sido añadido al mapa')
       equipos.push(data)
     }
@@ -77,7 +77,7 @@ export class MapContainer extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={15}
+        zoom={16}
         style={mapStyles}
         className={'map'}
         initialCenter={{ lat: 41.386471, lng: 2.186688 }}
