@@ -54,9 +54,9 @@ export class Teams extends React.Component {
     displayTeamList = (nombreEquipo) => {
         if(!this.state.players) return <div>No players</div>
         return this.state.players.map((player) => {
-            if (player.team_id === nombreEquipo)
+            // if (player.team_id === nombreEquipo)
                 return <ListGroup.Item key={player.name}>{player.name}<IosTrash fontSize="20px" color="grey" onClick={() => this.deletePlayer(player.id)}  className="trash-icon"/></ListGroup.Item>
-            else return null
+           // else return null
         })
     }
     displayTeamsData = () => {

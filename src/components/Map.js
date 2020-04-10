@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import React, { Component } from 'react'
+import axios from 'axios'
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
+
+const endpoint = process.env.REACT_APP_SERVER_ENDPOINT
 
 const mapStyles = {
   width: '100%',
@@ -15,8 +18,10 @@ const colores = {
 export class MapContainer extends Component {
 
   constructor(props) {
+
     super(props)
     this.state = {
+      coordinates: [],
       players: []
     }
     const socket = this.props.socket
@@ -33,18 +38,39 @@ export class MapContainer extends Component {
     })
   }
 
+  getCoordinates = () => {
+    axios.get(endpoint+"/coordinates/")
+    .then(res => {
+        console.log(res.data);
+        this.setState({
+          coordinates: res.data
+        })
+    })
+    .catch(error => this.setState({ error: error.message }));
+}
+
   updateCoordinatesState = (data) => {
+    console.log("updateCoordinatesState")
     let noEncontrado = true
     let equipos = this.state.players
-    equipos.map((item, key)=>{
-      if(item.playerId === data.playerId) {
-        equipos[key].latitude = data.latitude
-        equipos[key].longitude = data.longitude
+    for (let i; i<equipos.length; i++) {
+      if(equipos[i].playerId === data.playerId) {
+        equipos[i].latitude = data.latitude
+        equipos[i].longitude = data.longitude
         noEncontrado = false
         console.log('El equipo '+data.playerId+' se está moviendo')
         console.log(data)
       }
-    })
+    }
+    // equipos.map((item, key)=>{
+    //   if(item.playerId === data.playerId) {
+    //     equipos[key].latitude = data.latitude
+    //     equipos[key].longitude = data.longitude
+    //     noEncontrado = false
+    //     console.log('El equipo '+data.playerId+' se está moviendo')
+    //     console.log(data)
+    //   }
+    // })
     if (noEncontrado) { //TODO ??
       console.log('El equipo '+data.equipo+' ha sido añadido al mapa')
       equipos.push(data)
@@ -58,13 +84,11 @@ export class MapContainer extends Component {
   displayMarkers = () => {
     return this.state.players.map((jugador, index) => {
       let iconUrl = colores[jugador.equipo] ? colores[jugador.equipo] : "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
-      return <Marker key={index} id={index} position={
-        {
-          lat: jugador.latitude,
-          lng: jugador.longitude
-        }
-      }
-      title={jugador.jugador}
+      return <Marker key={index} 
+      id={index} 
+      position={ {lat: jugador.latitude, lng: jugador.longitude } }
+      title={'The marker`s title will appear as a tooltip.'}
+    name={'SOMA'}//{jugador.jugador}
       //name={'nombre'}
       icon={
         {url: iconUrl}

@@ -8,7 +8,6 @@ const socket = socketIOClient(endpoint);
 
 class GamePanel extends React.Component {
     constructor(props) {
-        debugger
         super(props)
         this.id = this.props.match.params.id
     }
