@@ -24,7 +24,6 @@ export class MapContainer extends Component {
       coordinates: []
     }
     const socket = this.props.socket
-    
     socket.on("coordenadasFromServer", data => {
       this.updateCoordinates(data)
     })
@@ -72,17 +71,17 @@ export class MapContainer extends Component {
 
 
   displayMarkers = () => {
+    debugger
     return this.state.coordinates.map((player, index) => {
-      let iconUrl = colores[player.equipo] ? colores[player.equipo] : "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
-      return <Marker key={index} 
-        id={index} 
-        position={ {lat: player.latitude, lng: player.longitude } }
-        title={player.username.toString()}
-        name={'SOMA'}//{player.username}
-        icon={
-          {url: iconUrl}
-        }
-      />
+        const username = player.username ? player.username.toString() : "sin nombre"
+        let iconUrl = colores[player.equipo] ? colores[player.equipo] : "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
+        return <Marker key={index} 
+          id={index} 
+          position={ {lat: player.latitude, lng: player.longitude } }
+          title={username}
+          name={'SOMA'}//{player.username}
+          icon={ {url: iconUrl} }
+        />
     })
   }
 
