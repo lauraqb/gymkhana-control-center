@@ -13,7 +13,7 @@ class Home extends React.Component {
         super(props)
         this.state = {
             envMissing: false
-          };
+        }
     }
     componentDidMount() {
         this.setState({ isLoading: true })
@@ -24,18 +24,17 @@ class Home extends React.Component {
     
     render() {
         const { envMissing } = this.state;
-        if (envMissing) {
-            return <p>Falta el fichero .env</p>;
-        }
-        return <div className="App-content">
+        return (
+            <div className="App-content">
+                {envMissing && <p>Falta la variable de entorno REACT_APP_SERVER_ENDPOINT</p>}
                 <Container>
-                <Row>
-                    <Col><div className="g-title"><h3>Centro de Control</h3></div></Col>
-                </Row>
-                <GamesList socket={socket}/>
-            </Container>
-        </div>
-        
+                    <Row>
+                        <Col><div className="g-title"><h3>Centro de Control</h3></div></Col>
+                    </Row>
+                    <GamesList socket={socket}/>
+                </Container>
+            </div>
+        )
     }
 }
 

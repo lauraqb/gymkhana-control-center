@@ -15,6 +15,7 @@ export class Teams extends React.Component {
         this.deletePlayer = this.deletePlayer.bind(this)
         this.state = {
             players: null,
+            error: null
         }
         this.gameId = this.props.gameId
         this.getTeamsList()
@@ -73,6 +74,7 @@ export class Teams extends React.Component {
     render() {
         return (
             <Container fluid="true" className="teams-container">
+                {this.state.error && <div>Error: {this.state.error}</div>}
                 <Row>
                     {this.displayTeamsData()} 
                 </Row>
