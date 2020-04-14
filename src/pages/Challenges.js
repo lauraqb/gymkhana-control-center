@@ -46,7 +46,7 @@ class GamePanel extends React.Component {
     }
 
     getGameData = () => {
-        axios.get(endpoint+"/games/"+this.id+"/challenges")
+        axios.get(endpoint+"/games/"+this.id)
         .then(res => {
             this.setState({
                 error: null,
