@@ -35,6 +35,8 @@ export class Teams extends React.Component {
     }
 
     deletePlayer = (playerId) => {
+        var r = window.confirm("¿Confirmas que deseas eliminar a este jugador?")
+        if (!r) return
         axios.get(endpoint+"/deletePlayer/"+playerId)
         .then(res => {
             this.getPlayersList()

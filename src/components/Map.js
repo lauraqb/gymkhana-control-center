@@ -24,7 +24,7 @@ export class MapContainer extends Component {
       coordinates: []
     }
     const socket = this.props.socket
-    socket.on("coordenadasFromServer", data => {
+    socket.on("server/coordinates", data => {
       this.updateCoordinates(data)
     })
   }
