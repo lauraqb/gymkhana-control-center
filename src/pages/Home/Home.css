@@ -24,19 +24,3 @@ a.g-link {
     margin-right: 10px;
 }
 
-.g-card p {
-    margin-bottom: 0;
-}
-
-.g-card .card-body {
-    padding: 1.0rem;
-    cursor: pointer;
-}
-
-.g-card-title {
-    font-weight: bold;
-}
-
-.g-card:hover {
-    background-color: aliceblue;
-}

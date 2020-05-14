@@ -79,23 +79,22 @@ export class GameCard extends React.Component {
                   <Card.Link href="#">Pruebas JSON</Card.Link>
                 </Link>
                 {this.state.teams && 
-                <div>
-                  <Card.Text>Equipos: 
-                    {this.state.teams.length == 0 && <span> No hay ningún equipo creado</span>}
-                    {this.state.teams.length > 0 && <div>{this.state.teams.map((team) => <div>{team.name}, {team.key} </div>)}</div>}
-                  </Card.Text>
-                  <Form onSubmit={this.addNewTeam}>
-                    <Form.Row>
-                        <Col>
-                          <Form.Control placeholder="Nombre equipo" name="teamName" value={this.state.teamName} onChange={this.handleChange}/>
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Clave" name="teamKey" value={this.state.teamKey} onChange={this.handleChange}/>
-                        </Col>
-                        <Button variant="primary" type="submit">Añadir nuevo equipo</Button>
-                    </Form.Row>
-                  </Form>
-                </div>
+                  <div>
+                    <Card.Text>Equipos: 
+                      <div className="g-teamslist">
+                      {this.state.teams.length === 0 && <span> No hay ningún equipo creado</span>}
+                      {this.state.teams.length > 0 && <div>{this.state.teams.map((team) => <div>- {team.name}, <span>{team.key}</span> </div>)}</div>}
+                      <Form onSubmit={this.addNewTeam}>
+                        <Form.Row>
+                            <Col><Form.Control placeholder="Nombre equipo" name="teamName" value={this.state.teamName} onChange={this.handleChange}/> </Col>
+                            <Col><Form.Control placeholder="Clave" name="teamKey" value={this.state.teamKey} onChange={this.handleChange}/></Col>
+                            <Button variant="primary" type="submit">Añadir nuevo equipo</Button>
+                        </Form.Row>
+                      </Form>
+                      </div>
+                    </Card.Text>
+                    
+                  </div>
                 }
               
               </div>
