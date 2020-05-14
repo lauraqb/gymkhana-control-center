@@ -48,18 +48,16 @@ export class NewGameModal extends React.Component {
                         <Form.Label>Equipos</Form.Label>
                         <Form.Row className="form-equipo">
                             <Col>
-                            <Form.Control placeholder="Nombre equipo" />
+                                <Form.Control placeholder="Nombre equipo" />
                             </Col>
                             <Col>
-                            <Form.Control placeholder="Clave" />
+                                <Form.Control placeholder="Clave" />
                             </Col>
                         </Form.Row>
                         + Añadir nuevo equipo
                         </Form.Row>
                     
-                    <Button variant="primary" type="submit">
-                        Enviar
-                    </Button>
+                    <Button variant="primary" type="submit"> Enviar </Button>
                 </Form>
                 </Modal.Body>
             </Modal>

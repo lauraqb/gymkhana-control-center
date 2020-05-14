@@ -24,7 +24,7 @@ export class GamesList extends React.Component {
     }
 
     getGames = () => {
-        axios.get(endpoint+"/games")
+        axios.get(endpoint+"/cc/games")
         .then(res => {
             console.log(res.data);
             this.setState({
@@ -34,11 +34,6 @@ export class GamesList extends React.Component {
         .catch(error => this.setState({ error: error.message }));
     }
 
-    displayPartidaCards = () => {
-        return this.state.games.map((game, index) => {
-            return <GameCard nombre={game.name} id={game.id} pin={game.pin}></GameCard>
-        })
-    }
 
     render() {
         if (this.state.error) {
@@ -49,7 +44,9 @@ export class GamesList extends React.Component {
         }
         return <div>
             <center>Selecciona una partida</center>
-            {this.displayPartidaCards()} 
+            {this.state.games.map((game, index) => {
+                return <GameCard nombre={game.name} id={game.id} pin={game.pin}></GameCard>
+            })}
             {/* TODO: donde poner el crear partida? */}
             {/* <Card className="g-card" onClick={this.handleClick}><Card.Body><h5>+ Crear una partida</h5></Card.Body></Card> */}
             <NewGameModal modal={this.state.modal} socket={this.props.socket}></NewGameModal>

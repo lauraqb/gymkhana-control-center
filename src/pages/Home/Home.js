@@ -1,9 +1,9 @@
 import React from 'react';
-import GamesList from '../components/GamesList'
+import GamesList from './components/GamesList'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import '../styles/Home.css'
+import './Home.css'
 import socketIOClient from "socket.io-client"
 const serverEndpoint = process.env.REACT_APP_SERVER_ENDPOINT //añadir la url del servidor
 const socket = socketIOClient(serverEndpoint);
