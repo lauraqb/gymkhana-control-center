@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Page Renders correctly 1`] = `
+<div
+  className="App-content"
+>
+  <Container
+    fluid={false}
+  >
+    <div
+      className="g-title"
+    >
+      <h3>
+        Centro de Control
+      </h3>
+    </div>
+    <GamesList />
+  </Container>
+</div>
+`;

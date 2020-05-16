@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameCard component:  Renders correctly 1`] = `
+<Card
+  body={false}
+  className="g-card"
+>
+  <CardBody>
+    <Link
+      className="g-link"
+      to="./game/undefined?clave=undefined"
+    >
+      <div
+        className="icono"
+      >
+        <ContextProvider
+          value={
+            Object {
+              "color": "#5a80a9",
+              "size": "2.50em",
+            }
+          }
+        >
+           
+          <GiAbstract118 />
+           
+        </ContextProvider>
+      </div>
+    </Link>
+    <div>
+      <Link
+        className="g-link"
+        to="./game/undefined?clave=undefined"
+      >
+        <CardText
+          className="g-card-title"
+        />
+      </Link>
+      <CardText>
+        PIN: 
+      </CardText>
+      <Link
+        className="g-link"
+        to="./game/undefined/challenges"
+      >
+        <Button
+          active={false}
+          disabled={false}
+          type="button"
+          variant="link"
+        >
+          Pruebas JSON
+        </Button>
+      </Link>
+      <ForwardRef
+        defaultActiveKey="0"
+      >
+        <ForwardRef
+          as={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "defaultProps": Object {
+                "active": false,
+                "disabled": false,
+                "type": "button",
+                "variant": "primary",
+              },
+              "displayName": "Button",
+              "render": [Function],
+            }
+          }
+          data-test="g-expand-teams-btn"
+          eventKey="1"
+          variant="link"
+        >
+          Equipos &gt;
+        </ForwardRef>
+        <AccordionCollapse
+          eventKey="1"
+        >
+          <div
+            className="g-teams-container"
+          >
+            <Form
+              inline={false}
+              onSubmit={[Function]}
+            >
+              <FormRow>
+                <Col>
+                  <FormControl
+                    name="teamName"
+                    onChange={[Function]}
+                    placeholder="Nombre equipo"
+                    value=""
+                  />
+                </Col>
+                <Col>
+                  <FormControl
+                    name="teamKey"
+                    onChange={[Function]}
+                    placeholder="Clave"
+                    value=""
+                  />
+                </Col>
+                <Button
+                  active={false}
+                  disabled={false}
+                  type="submit"
+                  variant="primary"
+                >
+                  Añadir nuevo equipo
+                </Button>
+              </FormRow>
+            </Form>
+          </div>
+        </AccordionCollapse>
+      </ForwardRef>
+    </div>
+  </CardBody>
+</Card>
+`;

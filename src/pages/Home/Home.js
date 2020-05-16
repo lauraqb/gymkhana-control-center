@@ -1,12 +1,8 @@
 import React from 'react';
 import GamesList from './components/GamesList'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import './Home.css'
-import socketIOClient from "socket.io-client"
-const serverEndpoint = process.env.REACT_APP_SERVER_ENDPOINT //añadir la url del servidor
-const socket = socketIOClient(serverEndpoint);
+const serverEndpoint = process.env.REACT_APP_SERVER_ENDPOINT
 
 class Home extends React.Component {
     constructor(props) {
@@ -28,10 +24,8 @@ class Home extends React.Component {
             <div className="App-content">
                 {envMissing && <p>Falta la variable de entorno REACT_APP_SERVER_ENDPOINT</p>}
                 <Container>
-                    <Row>
-                        <Col><div className="g-title"><h3>Centro de Control</h3></div></Col>
-                    </Row>
-                    <GamesList socket={socket}/>
+                    <div className="g-title"><h3>Centro de Control</h3></div>
+                    <GamesList/>
                 </Container>
             </div>
         )

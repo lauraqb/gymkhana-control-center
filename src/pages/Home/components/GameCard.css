@@ -7,8 +7,8 @@
     font-size: 1em;
 }
 
-.g-teamslist {
-    margin-left: 20px;
+.g-teams-container {
+    margin-left: 15px;
 }
 
 .g-card p {
@@ -26,4 +26,8 @@
 
 .g-card:hover {
     background-color: aliceblue;
+}
+
+.g-card .btn-link {
+    padding: 0
 }
